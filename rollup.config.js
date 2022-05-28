@@ -1,4 +1,5 @@
 import typescript from '@rollup/plugin-typescript'
+import commonjs from '@rollup/plugin-commonjs'
 import config from "./package.json"
 
 export default {
@@ -13,5 +14,12 @@ export default {
             file: config.module
         }
     ],
-    plugins: [typescript()]
+    external:['axios'],
+    plugins: [
+        typescript(),
+        commonjs({
+            include: 'node_modules/**',
+            sourceMap: false,
+        })
+    ]
 }
