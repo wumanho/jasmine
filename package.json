@@ -5,7 +5,9 @@
   "main": "lib/jasmine.cjs.js",
   "module": "lib/jasmine.esm.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "build:watch": "rollup -c rollup.config.js --watch",
+    "start:db": "json-server -w db.json"
   },
   "author": "",
   "license": "ISC",
