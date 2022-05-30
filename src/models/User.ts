@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios/dist/axios';
+import {Eventing} from "./Eventing";
 
 interface UserProps {
   id?: number,
@@ -9,6 +10,8 @@ interface UserProps {
 type TemplateUnit = string | number
 
 export class User {
+
+  public events: Eventing = new Eventing()
 
   constructor(private data: UserProps) {
   }
