@@ -1,11 +1,10 @@
-type TemplateUnit = string | number
 
 export class Attributes<T> {
   constructor(private data: T) {
   }
 
-  get(propName: string): TemplateUnit {
-    return this.data[propName]
+  get<K extends keyof T>(key: K): T[K] {
+    return this.data[key]
   }
 
   set(update: Partial<T>): void {
