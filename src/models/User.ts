@@ -1,7 +1,7 @@
 import {Eventing} from "./Eventing";
 import {Sync} from "./Sync";
 import {Attributes} from "./Attributes";
-import {AxiosResponse} from "axios";
+import {AxiosError, AxiosResponse} from "axios";
 
 export interface UserProps {
   id?: number,
@@ -34,8 +34,8 @@ export class User {
   }
 
   set(update: UserProps): void {
-    // 每次保存值后，都需要触发 change 事件
     this.attributes.set(update)
+    // change 钩子
     this.trigger('change')
   }
 
@@ -50,6 +50,16 @@ export class User {
   }
 
   save(): void {
-
+    this.sync.save(
+      this.attributes.getAll()
+    )
+      .then((res: AxiosResponse): void => {
+        // save 钩子
+        this.trigger('save')
+      })
+      .catch((e: AxiosError) => {
+        this.trigger('error')
+        console.warn(e)
+      })
   }
 }

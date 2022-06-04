@@ -6,7 +6,11 @@ export class Attributes<T> {
     return this.data[key]
   }
 
-  set(update: T): void {
+  getAll = (): T => {
+    return this.data
+  }
+
+  set = (update: T): void => {
     Object.assign(this.data, update)
   }
 }

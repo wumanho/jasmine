@@ -2,8 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "newName",
-      "age": 18
+      "name": "saveTest"
     },
     {
       "name": "wumanho",
