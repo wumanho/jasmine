@@ -12,7 +12,6 @@ export interface UserProps {
 const rootURL = 'http://localhost:3000/users'
 
 export class User {
-
   public events: Eventing = new Eventing()
   public sync: Sync<UserProps> = new Sync<UserProps>(rootURL)
   public attributes: Attributes<UserProps>
@@ -20,5 +19,4 @@ export class User {
   constructor(public attrs: UserProps) {
     this.attributes = new Attributes<UserProps>(attrs)
   }
-
 }
