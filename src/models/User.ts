@@ -1,7 +1,7 @@
-import {Eventing} from "./Eventing";
-import {Sync} from "./Sync";
+import {Model} from "./Model";
 import {Attributes} from "./Attributes";
-import {AxiosError, AxiosResponse} from "axios";
+import {APISync} from "./APISync";
+import {Eventing} from "./Eventing";
 
 export interface UserProps {
   id?: number,
@@ -12,54 +12,12 @@ export interface UserProps {
 
 const rootURL = 'http://localhost:3000/users'
 
-export class User {
-  public events: Eventing = new Eventing()
-  public sync: Sync<UserProps> = new Sync<UserProps>(rootURL)
-  public attributes: Attributes<UserProps>
-
-  constructor(public attrs: UserProps) {
-    this.attributes = new Attributes<UserProps>(attrs)
-  }
-
-  get on() {
-    return this.events.on
-  }
-
-  get trigger() {
-    return this.events.trigger
-  }
-
-  get get() {
-    return this.attributes.get
-  }
-
-  set(update: UserProps): void {
-    this.attributes.set(update)
-    // change 钩子
-    this.trigger('change')
-  }
-
-  fetch(): void {
-    const id = this.get('id')
-    if (!id) {
-      throw new Error('Cannot fetch without an id')
-    }
-    this.sync.fetch(id).then((res: AxiosResponse): void => {
-      this.set(res.data)
-    })
-  }
-
-  save(): void {
-    this.sync.save(
-      this.attributes.getAll()
+export class User extends Model<UserProps> {
+  static buildUser(attrs: UserProps): User {
+    return new User(
+      new Attributes<UserProps>(attrs),
+      new Eventing(),
+      new APISync<UserProps>(rootURL)
     )
-      .then((res: AxiosResponse): void => {
-        // save 钩子
-        this.trigger('save')
-      })
-      .catch((e: AxiosError) => {
-        this.trigger('error')
-        console.warn(e)
-      })
   }
 }
