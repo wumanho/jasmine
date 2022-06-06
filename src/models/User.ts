@@ -29,4 +29,10 @@ export class User extends Model<UserProps> {
       init
     )
   }
+
+
+  setRandomAge(): void {
+    const randomAge = Math.round(Math.random() * 100)
+    this.set({age: randomAge})
+  }
 }
