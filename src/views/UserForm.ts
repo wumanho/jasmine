@@ -1,27 +1,23 @@
-import {User} from "../models/User";
+import {RegionsMapResult, View} from "./View";
+import {User, UserProps} from "../models/User";
+import {UserShow} from "./UserShow";
 
 type EventMap = {
   [key: string]: () => void
 }
 
-export class UserForm {
-
-  constructor(public parent: HTMLElement, public model: User) {
-    this.bindModel()
-  }
-
-  // 注册响应式
-  bindModel(): void {
-    this.model.on('change', () => {
-      this.render()
-    })
-  }
+export class UserForm extends View<User, UserProps> {
 
   eventsMap(): EventMap {
     return {
       'click:.set-age': this.onSetAgeClick,
       'click:.set-name': this.onSetNameClick,
+      'click:.save-model': this.onSaveClick,
     }
+  }
+
+  onSaveClick = (): void => {
+    this.model.save()
   }
 
   onSetNameClick = (): void => {
@@ -39,32 +35,10 @@ export class UserForm {
   template(): string {
     return `
         <div>
-          <h1>User Form</h1>
-          <div>User name : ${this.model.get('name')}</div>
-          <div>User age : ${this.model.get('age')}</div>
           <input/>
           <button class="set-name">Change Name</button>
           <button class="set-age">Set random age</button>
+          <button class="save-model">Save User</button>
         </div>`
-  }
-
-  render(): void {
-    // 避免重复渲染
-    this.parent.innerHTML = ''
-    // 挂载 template
-    const templateElement = document.createElement('template')
-    templateElement.innerHTML = this.template()
-    this.bindEvents(templateElement.content)
-    this.parent.append(templateElement.content)
-  }
-
-  bindEvents(fragment: DocumentFragment): void {
-    const eventMap = this.eventsMap()
-    for (let eventsKey in eventMap) {
-      const [eventName, selector] = eventsKey.split(':')
-      fragment.querySelectorAll(selector).forEach(element => {
-        element.addEventListener(eventName, eventMap[eventsKey])
-      })
-    }
   }
 }
