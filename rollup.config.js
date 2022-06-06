@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import config from "./package.json"
 
 export default {
-    input: "./src/index.ts",
+    input: "./example/renderOne.ts",
     output: [
         {
             format: "cjs",

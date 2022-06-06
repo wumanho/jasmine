@@ -1,5 +1,5 @@
-import {RegionsMapResult, View} from "./View";
-import {User, UserProps} from "../models/User";
+import {RegionsMapResult, View} from "../../src";
+import {User, UserProps} from "./User";
 import {UserShow} from "./UserShow";
 import {UserForm} from "./UserForm";
 

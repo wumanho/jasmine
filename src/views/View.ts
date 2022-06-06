@@ -1,4 +1,5 @@
-import {Model} from "../models/Model";
+import {Model} from "../index";
+import {getTemplate} from '../shared'
 
 export interface EventMapResult {
   [key: string]: () => void
@@ -41,7 +42,7 @@ export abstract class View<T extends Model<M>, M> {
     // 避免重复渲染
     this.parent.innerHTML = ''
     // 挂载 template
-    const templateElement = document.createElement('template')
+    const templateElement = getTemplate()
     templateElement.innerHTML = this.template()
     // 初始化事件绑定
     this.bindEvents(templateElement.content)

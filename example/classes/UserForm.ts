@@ -1,6 +1,5 @@
-import {RegionsMapResult, View} from "./View";
-import {User, UserProps} from "../models/User";
-import {UserShow} from "./UserShow";
+import {View} from "../../src";
+import {User, UserProps} from "./User";
 
 type EventMap = {
   [key: string]: () => void
