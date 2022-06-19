@@ -1,5 +1,8 @@
-import {CallBack} from "./Eventing";
+import {CallBack, Eventing} from "./Eventing";
 import {AxiosError, AxiosPromise, AxiosResponse} from "axios";
+import {Attributes} from "./Attributes";
+import {APISync} from "./APISync";
+import {UserProps} from "../../example/classes/User";
 
 interface ModelAttributes<T> {
   set(update: T): void
