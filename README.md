@@ -20,7 +20,7 @@ pnpm build
 dist
 ├── index.js
 ├── index.mjs
-└── indexd.ts
+└── index.d.ts
 ```
 &nbsp;
 

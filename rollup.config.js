@@ -6,7 +6,7 @@ import dtsPlugin from 'rollup-plugin-dts'
 function createConfig({dts, esm} = {}) {
   let file = 'dist/index.js'
   if (dts) {
-    file = file.replace('.js', 'd.ts')
+    file = file.replace('.js', '.d.ts')
   }
   if (esm) {
     file = file.replace('.js', '.mjs')
