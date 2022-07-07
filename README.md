@@ -15,7 +15,13 @@
 ```
 pnpm build
 ```
-
+输出结果
+```
+dist
+├── index.js
+├── index.mjs
+└── indexd.ts
+```
 &nbsp;
 
 ### 创建 Model
