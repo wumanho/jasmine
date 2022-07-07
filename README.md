@@ -18,9 +18,9 @@ pnpm build
 输出结果
 ```
 dist
-├── index.js
-├── index.mjs
-└── index.d.ts
+├── index.js    // cjs
+├── index.mjs   // esm
+└── index.d.ts  // ts declaration
 ```
 &nbsp;
 
